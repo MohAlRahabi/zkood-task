@@ -41,6 +41,13 @@ class ImageController extends Controller
             $user = User::find($request->o_id);
         if($request->o_type == 'product')
             $product = Product::find($request->o_id);
+        $image = Image::create([
+            'o_id' => $request->o_id ,
+            'o_type' => $request->o_type == 'user' ? User::class : Product::class ,
+            'path' => $request->path ,
+            'description' => $request->description ,
+        ]);
+        return response()->json($image,200);
     }
 
     /**

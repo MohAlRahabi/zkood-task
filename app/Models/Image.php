@@ -10,7 +10,14 @@ class Image extends Model
     use HasFactory;
 
     protected $fillable = [
+        'o_id' ,
+        'o_type' ,
         'path',
         'description'
     ];
+
+    public function o()
+    {
+        return $this->morphTo();
+    }
 }

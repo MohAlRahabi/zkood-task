@@ -1,10 +1,5 @@
 <?php
 
-use App\Http\Controllers\ImageController;
-use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\UnitController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('units', UnitController::class);
-Route::resource('products', ProductController::class);
-Route::resource('users', UserController::class);
-Route::resource('images', ImageController::class);
-Route::resource('inventories', InventoryController::class);
+

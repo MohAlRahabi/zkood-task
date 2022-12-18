@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\Unit;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -42,12 +42,17 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @param $product_id
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function show(Product $product, Request $request)
+    public function show($product_id, Request $request)
     {
-        return $product;
+        $product = Product::where('id',$product_id)->first();
+        if($product){
+            return response()->json($product,200);
+        }
+        return response()->json(['message'=>"not found!!"],404);
     }
 
     /**

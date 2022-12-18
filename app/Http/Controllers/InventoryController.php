@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdateInventoryRequest;
+use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\Unit;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class InventoryController extends Controller
@@ -31,13 +34,20 @@ class InventoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
         $product = Product::find($request->product_id);
         $unit = Unit::find($request->unit_id);
+        $amount = $request->amount;
+        $inventory = Inventory::create([
+            'product_id' => $product->id ,
+            'unit_id' => $unit->id ,
+            'amount' => $amount ,
+        ]);
+        return response()->json($inventory,200);
     }
 
     /**
@@ -65,7 +75,7 @@ class InventoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id
      * @return \Illuminate\Http\Response
      */
